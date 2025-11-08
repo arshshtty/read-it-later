@@ -1,0 +1,31 @@
+{
+  "name": "read-it-later",
+  "version": "1.0.0",
+  "description": "Multi-platform read-it-later app with web, iOS, and Android support",
+  "private": true,
+  "workspaces": [
+    "backend",
+    "web",
+    "mobile",
+    "shared"
+  ],
+  "scripts": {
+    "dev": "docker-compose up",
+    "dev:backend": "cd backend && npm run dev",
+    "dev:web": "cd web && npm run dev",
+    "dev:mobile": "cd mobile && npm start",
+    "build": "npm run build --workspaces --if-present",
+    "clean": "rm -rf node_modules && npm run clean --workspaces --if-present"
+  },
+  "keywords": [
+    "read-it-later",
+    "bookmarks",
+    "reading-list"
+  ],
+  "author": "",
+  "license": "MIT",
+  "engines": {
+    "node": ">=18.0.0",
+    "npm": ">=9.0.0"
+  }
+}
