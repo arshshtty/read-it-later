@@ -2,18 +2,77 @@
 @tailwind components;
 @tailwind utilities;
 
-* {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  body {
+    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
+      'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
+      sans-serif;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+    @apply bg-light-bg dark:bg-dark-bg text-light-text dark:text-dark-text transition-colors duration-200;
+  }
+
+  /* Custom scrollbar for dark mode */
+  ::-webkit-scrollbar {
+    width: 12px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-gray-100 dark:bg-dark-bg-lighter;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply bg-gray-400 dark:bg-dark-bg-light rounded-lg;
+  }
+
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-gray-500 dark:bg-dark-muted;
+  }
 }
 
-body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+@layer components {
+  /* Button variants */
+  .btn {
+    @apply px-4 py-2 rounded-lg font-medium transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-offset-2 disabled:opacity-50 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply bg-dark-accent-blue text-white hover:bg-opacity-90 focus:ring-dark-accent-blue;
+  }
+
+  .btn-success {
+    @apply bg-dark-accent-green text-white hover:bg-opacity-90 focus:ring-dark-accent-green;
+  }
+
+  .btn-danger {
+    @apply bg-dark-accent-red text-white hover:bg-opacity-90 focus:ring-dark-accent-red;
+  }
+
+  .btn-secondary {
+    @apply bg-gray-200 dark:bg-dark-bg-light text-gray-800 dark:text-dark-text hover:bg-gray-300 dark:hover:bg-dark-bg-lighter;
+  }
+
+  /* Input styles */
+  .input {
+    @apply px-4 py-2 border rounded-lg transition-all duration-200 focus:outline-none focus:ring-2 focus:ring-dark-accent-blue;
+    @apply bg-white dark:bg-dark-bg-lighter border-gray-300 dark:border-dark-border;
+    @apply text-gray-900 dark:text-dark-text placeholder-gray-500 dark:placeholder-dark-muted;
+  }
+
+  /* Card styles */
+  .card {
+    @apply bg-white dark:bg-dark-bg-lighter rounded-lg shadow-md dark:shadow-dark-border/50 transition-all duration-200;
+  }
+
+  .card-hover {
+    @apply card hover:shadow-lg dark:hover:shadow-dark-accent-blue/20;
+  }
 }
 
 /* Reader themes */
@@ -23,8 +82,7 @@ body {
 }
 
 .reader-dark {
-  background-color: #1a1a1a;
-  color: #e0e0e0;
+  @apply bg-dark-bg text-dark-text;
 }
 
 .reader-sepia {
@@ -45,6 +103,7 @@ body {
 .reader-content h3 {
   margin-top: 1.5em;
   margin-bottom: 0.5em;
+  @apply text-dark-text-light;
 }
 
 .reader-content p {
