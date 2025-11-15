@@ -1,5 +1,6 @@
 import express, { Application, Request, Response, NextFunction } from 'express';
 import cors from 'cors';
+import helmet from 'helmet';
 import { config } from './config/env';
 import './config/passport'; // Initialize passport strategies
 import authRoutes from './routes/auth.routes';
@@ -9,6 +10,19 @@ import categoriesRoutes from './routes/categories.routes';
 const app: Application = express();
 
 // Middleware
+// Security headers with helmet
+app.use(helmet({
+  contentSecurityPolicy: {
+    directives: {
+      defaultSrc: ["'self'"],
+      styleSrc: ["'self'", "'unsafe-inline'"],
+      scriptSrc: ["'self'"],
+      imgSrc: ["'self'", "data:", "https:"],
+    },
+  },
+  crossOriginEmbedderPolicy: false, // Allow embedding for OAuth flows
+}));
+
 app.use(cors({
   origin: config.cors.origins,
   credentials: true,
